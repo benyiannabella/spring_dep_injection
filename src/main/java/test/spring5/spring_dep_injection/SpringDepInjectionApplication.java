@@ -38,8 +38,11 @@ public class SpringDepInjectionApplication {
 		ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctx.getBean("constructorInjectedController");
 		System.out.println(constructorInjectedController.getGreeting());
 
-
+		System.out.println("_________Dog or Cat");
+		PetController petController = (PetController) ctx.getBean("petController");
+		System.out.println(petController.whichPetIsTheBest());
 
 	}
 
 }
+
