@@ -4,10 +4,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
+import test.spring5.spring_dep_injection.repositories.EnglishGreetingRepository;
+import test.spring5.spring_dep_injection.repositories.EnglishGreetingRepositoryImpl;
 import test.spring5.spring_dep_injection.services.*;
 
 @Configuration
 public class GreetingServiceConfig {
+
+    @Bean
+    EnglishGreetingRepository englishGreetingRepository(){
+        return new EnglishGreetingRepositoryImpl();
+    }
 
     @Profile({"ES", "default"})
     @Bean("i18nService")
@@ -16,8 +23,8 @@ public class GreetingServiceConfig {
     }
     @Profile("EN")
     @Bean
-    I18nEnglishMyService i18nService(){
-        return new I18nEnglishMyService();
+    I18nEnglishMyService i18nService(EnglishGreetingRepository englishGreetingRepository){
+        return new I18nEnglishMyService(englishGreetingRepository);
     }
 
     @Primary
