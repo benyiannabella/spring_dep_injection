@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import test.spring5.spring_dep_injection.controllers.*;
+import test.spring5.spring_dep_injection.datasource.FakeDataSource;
 import test.spring5.spring_dep_injection.services.PrototypeBean;
 import test.spring5.spring_dep_injection.services.SingletonBean;
 
@@ -54,7 +55,10 @@ public class SpringDepInjectionApplication {
 		PrototypeBean prototypeBean2 = ctx.getBean(PrototypeBean.class);
 		System.out.println(prototypeBean2.getMyScope());
 
-
+		FakeDataSource fakeDataSource = ctx.getBean(FakeDataSource.class);
+		System.out.println(fakeDataSource.getUserName());
+		System.out.println(fakeDataSource.getJdbcurl());
+		System.out.println(fakeDataSource.getPassword());
 	}
 
 }
