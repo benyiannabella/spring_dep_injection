@@ -11,7 +11,7 @@ public class PetController {
 
     private final PetService petService;
 
-    public PetController(@Qualifier("dogPetService")PetService petService) {
+    public PetController(@Qualifier("petService") PetService petService) {
         this.petService = petService;
     }
 

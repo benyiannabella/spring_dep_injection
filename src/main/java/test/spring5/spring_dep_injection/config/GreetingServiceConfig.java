@@ -1,15 +1,30 @@
 package test.spring5.spring_dep_injection.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.*;
 import test.spring5.spring_dep_injection.repositories.EnglishGreetingRepository;
 import test.spring5.spring_dep_injection.repositories.EnglishGreetingRepositoryImpl;
 import test.spring5.spring_dep_injection.services.*;
 
+@ImportResource("classpath:xmlExample.xml")
 @Configuration
 public class GreetingServiceConfig {
+
+    @Bean
+    PetServiceFactory petServiceFactory(){
+        return new PetServiceFactory();
+    }
+
+    @Profile({"dog", "default"})
+    @Bean("petService")
+    PetService getDogPetService(PetServiceFactory petServiceFactory){
+        return petServiceFactory.getPetService("dog");
+    }
+
+    @Profile("cat")
+    @Bean("petService")
+    PetService getCatPetService(PetServiceFactory petServiceFactory){
+        return petServiceFactory.getPetService("cat");
+    }
 
     @Bean
     EnglishGreetingRepository englishGreetingRepository(){
@@ -34,7 +49,7 @@ public class GreetingServiceConfig {
     }
 
 
-    @Bean
+//    @Bean
     ConstructorMyService constructorMyService(){
         return new ConstructorMyService();
     }
