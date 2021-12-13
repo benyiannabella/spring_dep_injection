@@ -7,7 +7,7 @@ import test.spring5.spring_dep_injection.repositories.EnglishGreetingRepository;
 import test.spring5.spring_dep_injection.repositories.EnglishGreetingRepositoryImpl;
 import test.spring5.spring_dep_injection.services.*;
 
-@PropertySource("classpath:datasource.properties")
+//@PropertySource("classpath:datasource.properties")
 @ImportResource("classpath:xmlExample.xml")
 @Configuration
 public class GreetingServiceConfig {
